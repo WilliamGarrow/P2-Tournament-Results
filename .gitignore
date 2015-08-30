@@ -1,0 +1,5 @@
+# Ignore Python compiled artifacts
+.pyc
+
+# Ignore OS X artifacts
+.DS_Store
