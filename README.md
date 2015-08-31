@@ -13,20 +13,10 @@ In this project, I have written a Python module that uses the PostgreSQL databas
 
 ## Tournament Results Project Setup and Runtime
 ### Database Setup
-```
-psql -f tournament.sql
-```
 
 The tournament.sql file will drop previous database, if it exists, create a new database named 'tournament' and connect to it.
 ```
--- Drop previous testing database if they exist
-DROP DATABASE IF EXISTS tournament;
-
--- Create the 'tournament' DB.
-CREATE DATABASE tournament;
-
--- Connect to 'tournament' DB prior to creating tables
-\c tournament;
+psql -f tournament.sql
 ```
 
 #### Terminal Results
