@@ -86,7 +86,9 @@ def playerStandings():
         matches: the number of matches the player has played
     """
     with with_cursor() as cursor:
-        cursor.execute("SELECT player_id, name, wins, matches_played FROM standings_view ORDER BY wins DESC;")
+        query = "SELECT player_id, name, wins, matches_played \
+        FROM standings_view ORDER BY wins DESC;"
+        cursor.execute(query)
         match_standings = cursor.fetchall()
     return match_standings
 
@@ -120,20 +122,9 @@ def swissPairings():
         name2: the second player's name
     """
     with with_cursor() as cursor:
-        cursor.execute("SELECT player_id, name, wins, matches_played FROM standings_view AS swiss_pairings;")
+        query = "SELECT a.id, a.name, b.id, b.name \
+        FROM player_wins as a JOIN player_wins as b \
+        ON a.wins = b.wins WHERE a.id > b.id;"
+        cursor.execute(query)
         results = cursor.fetchall()
-
-    # Implements an empty list container to hold swiss_pairings iterations.
-    swiss_pairings = []
-
-    # Sets the range while finding the size of the list and then iterates through the results.
-    for i in range(0, len(results) - 1, 2):
-        paired = (results[i][0],
-                  results[i][1],
-                  results[i + 1][0],
-                  results[i + 1][1])
-        # The paired results are added as a tuple to the end of the list of each iteration.
-        swiss_pairings.append(paired)
-
-    # The paired results are added as a tuple to the end of the list of each iteration.
-    return swiss_pairings
+    return results
