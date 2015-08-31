@@ -22,12 +22,6 @@ CREATE TABLE matches ( id SERIAL PRIMARY KEY,
 	loser INTEGER REFERENCES players (id)
 	);
 
--- Create 'results' table in 'tournament' DB.
-CREATE TABLE results ( match_results_id SERIAL PRIMARY KEY,
-	winner INTEGER REFERENCES players (id),
-	loser INTEGER REFERENCES players (id)
-	);
-
 -- Create 'standings_view' in 'tournament' DB.
 CREATE VIEW standings_view AS
 	--
@@ -48,3 +42,11 @@ CREATE VIEW standings_view AS
 	-- Sorting performed on the database by wins in descending order.
 	GROUP BY players.id
 	ORDER BY wins DESC;
+
+-- Create 'player_wins' view in 'tournament' DB.
+-- Selects a player's, id, name, and wins, grouped by id, to avoid duplicates.
+CREATE VIEW player_wins AS
+  SELECT players.id, players.name, COUNT(matches.winner) AS wins
+    FROM players LEFT JOIN matches
+      ON players.id = matches.winner
+    GROUP BY players.id,  winner;
