@@ -24,7 +24,6 @@ CREATE TABLE matches ( id SERIAL PRIMARY KEY,
 
 -- Create 'standings_view' in 'tournament' DB.
 CREATE VIEW standings_view AS
-	--
 	SELECT players.id AS player_id, players.name,
 		-- Function to return the number and values of the records in the 'matches' table.
 		(SELECT COUNT(matches.winner)
