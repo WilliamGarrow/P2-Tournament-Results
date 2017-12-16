@@ -1,7 +1,7 @@
-P2-Tournament-Results
+Tournament-Results
 =======================================================
 
-This a project submission for Udacity's Full Stack Web Developer Nanodegree.
+Full Stack Web Development
 
 ## Overview
 
